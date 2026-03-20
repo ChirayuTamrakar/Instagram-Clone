@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 // Middleware to authenticate user -> Check if token exist
 //                                 -> is token blacklisted
 //                                 -> Find user form the token and return user.
-const authUser = async (req, res, next) => {
+export const authUser = async (req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1]; //IMP ?  - 
     console.log('Token from cookie or header:', token);
     // Check if token exists

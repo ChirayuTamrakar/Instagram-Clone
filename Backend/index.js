@@ -27,8 +27,8 @@ app.get("/", (req,res)=>{
 });
 
 app.use("/user", userRoutes);
-app.use('/posts', postRouter);
-app.use('/follow', followRouter);
+// app.use('/posts', postRouter);
+// app.use('/follow', followRouter);
 
 app.listen(PORT, ()=> {
     console.log('Server is running');

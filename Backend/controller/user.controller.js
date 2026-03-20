@@ -1,7 +1,8 @@
-const userModel = require("../../../BookMyCab/Backend/models/user.model");
-const userService = require('../services/user.service')
-const {validationResult} = require('express-validator')
-const blackListTokenModel = require('../models/blackistToken.model');
+import userModel from "../../../BookMyCab/Backend/models/user.model.js";
+import { createUser } from "../services/user.service.js";
+import { validationResult } from "express-validator";
+import blackListTokenModel from "../models/blacklist.model.js";
+
 
 export const registerUser = async(req, res)=>{
     //Check any Problem with the input data
@@ -18,7 +19,7 @@ export const registerUser = async(req, res)=>{
     // Generate hashPassword for new user
     const hashedPassword = await userModel.hashPassword(password);
     // Make in user in DataBase
-    const user = await userService.createUser({
+    const user = await createUser({
         firstname: fullname.firstname,
         lastname: fullname.lastname,
         email,

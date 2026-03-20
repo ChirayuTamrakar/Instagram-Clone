@@ -1,16 +1,22 @@
-const express = require('express');
-const router = express.Router();
-const upload = require('../Middleware/multer.middleware');
-const postController = require('../controller/post.controller');
-const authMiddleware = require('../Middleware/auth.middleware');
+import express from "express";
+import { upload } from "../Middleware/multer.middleware.js";
+import {
+  createPost,
+  getFeed,
+  getPosts
+} from "../controller/post.controller.js";
+import { authUser } from "../Middleware/auth.middleware.js";
 
-router.post('/',authMiddleware.authUser,  upload.single('image'),  postController.createPost);
+const router = express.Router();
+
+
+router.post('/',authUser,  upload.single('image'), createPost);
 
 // Feed n single post 
-router.get( '/feed', authMiddleware.authUser, postController.getFeed);
-router.get('/:id',   postController.getPost);
+router.get( '/feed', authUser, getFeed);
+router.get('/:id', getPosts);
 
 // Likes to make the like
-router.post('/:id/like', authMiddleware.authUser, postController.toggleLike);
+router.post('/:id/like', authUser, toggleLike);
 
 export default router;
